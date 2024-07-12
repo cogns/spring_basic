@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+    <h2>회원가입</h2>
+    <div th:replace = "member/header :: headerFragment"></div>
+        <form method="post" action="/member/create">
+            이름
+            <br><input name="name" type="text"><br>
+            email
+            <br><input name="email" type="email"><br>
+            password
+            <br><input  name="password" type="password"><br>
+            <br>
+            <input type="submit" value="가입완료">
+        </form>
+</body>
+</html>

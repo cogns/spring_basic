@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js를 활용한 form 데이터 전송</title>
+
+</head>
+<body>
+<h1>js를 활용한 form 데이터 전송</h1>
+
+<form id="postform">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="">
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" value="">
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" value="">
+    <br>
+
+    <label for="file">Password:</label>
+    <input type="file" id="file" name="file" value="">
+
+
+    <input type="submit" value="Submit">
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementById('postform').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const fileInput = document.getElementById('file');
+        const file = fileInput.files[0]; //file은 배열형태로 get
+
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('file', file);
+
+        try {
+            const response = await axios.post('http://localhost:8080/hello/axios-form-file-view', formData, {headers : {'Content-Type': 'multipart/form-data'}});
+            console.log(response.data);
+        } catch (e) {
+            console.error(e);
+        }
+    });
+</script>
+</body>
+</html>
