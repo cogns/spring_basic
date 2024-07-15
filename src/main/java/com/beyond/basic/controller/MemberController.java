@@ -20,8 +20,9 @@ public class MemberController {
 
 //    의존성 주입(DI)방법1. 생성자주입방식(가장많이 사용하는 방식)
 //    장점 : 1)final을 통해 상수로 사용가능 2)다형성 구현가능 3)순환참조방지
+//    생성자가 한개밖에 없을때는 Autowired생략가능
     private final MemberService memberService;
-    @Autowired
+    @Autowired //싱글톤객체를 주입(DI) 받는가라는 것을 의미
     public MemberController(MemberService memberService){
         this.memberService = memberService;
     }
@@ -77,7 +78,6 @@ public class MemberController {
     public String memberCreate(){
         return "member/member-create";
     }
-
 
 
 //    ✨회원가입데이터를 받는다.

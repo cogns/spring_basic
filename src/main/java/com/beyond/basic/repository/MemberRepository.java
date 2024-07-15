@@ -6,11 +6,8 @@ import com.beyond.basic.domain.MemberReqDto;
 import java.util.*;
 
 public interface MemberRepository {
-
     Member save(Member member);
-
     List<Member> findAll();
-
     Optional<Member> findById(Long id);
 
 }
