@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 // 어노테이션은 스프링에서 미리 기능을 만들어둔 것
@@ -38,6 +39,10 @@ public class HelloController {
 
     @ResponseBody //응답을 주겠다
     public String helloWorld(){
+//        아래와 같이 Controller에서도 HttpServletRequest를 주입받아 사용 가능
+//    public String helloWorld(HttpServletRequest request){
+//        System.out.println(request.getSession());
+//        System.out.println(request.getHeader("Cookie"));
         return "helloworld";
     }
 

@@ -4,6 +4,8 @@ import com.beyond.basic.domain.*;
 import com.beyond.basic.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class MemberRestController {
 
     private final MemberService memberService;
+
     @Autowired
     public MemberRestController(MemberService memberService) {
         this.memberService = memberService; // 이름이 같아서 (다형성x) this 사용
@@ -22,18 +25,25 @@ public class MemberRestController {
 
 
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "member/home";
     }
 
 
     @GetMapping("/member/list")
-    public List<MemberResDto> memberList() {
-        List<MemberResDto> memberList = memberService.memberList();
-        return memberList;
+//    public List<MemberResDto> memberList() {
+//        List<MemberResDto> memberList = memberService.memberList();
+//        return memberList;
+//    }
 
+    public ResponseEntity<CommonResDto> memberList() {
+        Member member = new Member();
+        CommonResDto commonResDto = new CommonResDto(HttpStatus.OK, "member is successfully created", member);
+        return new ResponseEntity<>(commonResDto, HttpStatus.OK);
 
     }
+
+
     @GetMapping("/member/detail/{id}")
     public MemberDetailResDto memberDetail(@PathVariable Long id) {
         return memberService.memberDetail(id);
